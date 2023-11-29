@@ -56,7 +56,7 @@ float roundToDecimalPlaces(float value, int decimalPlaces) {
 void serialPrint(){
   // Get Percentage
   digitalWrite(TRIG_PIN, LOW);
-  delayMicroseconds(10);
+  delayMicroseconds(2);
   digitalWrite(TRIG_PIN, HIGH);
   delayMicroseconds(10);
   digitalWrite(TRIG_PIN, LOW);
@@ -72,6 +72,9 @@ void serialPrint(){
   }
   else {
     weight = scale.get_units();
+    if (weight < 0.0) {
+      weight = 0.0; // Set negative readings to 0
+    }
     kg = roundToDecimalPlaces((weight/1000), 2);
   }
 
